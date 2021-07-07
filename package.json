@@ -1,0 +1,20 @@
+{
+  "name": "aave-code-examples",
+  "version": "1.0.0",
+  "description": "This repository is for example code relating to the Aave Protocol, for developers to use either as reference examples or starters.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "truffle-hdwallet-provider-privkey": "^0.3.0",
+    "web3": "^1.4.0"
+  }
+}
