@@ -2,7 +2,7 @@
 pragma solidity 0.6.12;
 
 import { FlashLoanReceiverBase } from "./FlashLoanReceiverBase.sol";
-import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from "./Interfaces.sol";
+import { ILendingPool, ILendingPoolAddressesProvider, IERC20, IFlashLoanReceiver } from "./Interfaces.sol";
 import { SafeMath } from "./Libraries.sol";
 
 /**
@@ -11,7 +11,7 @@ import { SafeMath } from "./Libraries.sol";
     exposed to a 'griefing' attack, where the stored funds are used by an attacker.
     !!!
  */
-contract MyV2FlashLoan is FlashLoanReceiverBase {
+contract MyV2FlashLoan is IFlashLoanReceiver {
     using SafeMath for uint256;
 
     constructor(ILendingPoolAddressesProvider _addressProvider) FlashLoanReceiverBase(_addressProvider) public {}
