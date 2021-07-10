@@ -4,7 +4,7 @@ import "./aave/FlashLoanReceiverBaseV2.sol";
 import "./interfaces/v2/ILendingPoolAddressesProviderV2.sol";
 import "./interfaces/v2/ILendingPoolV2.sol";
 
-contract FlashloanV2 is FlashLoanReceiverBaseV2 {
+contract FlashloanV2 is FlashLoanReceiverBaseV2, Withdrawable {
 
     constructor(address _addressProvider) FlashLoanReceiverBaseV2(_addressProvider) public {}
 
@@ -77,14 +77,14 @@ contract FlashloanV2 is FlashLoanReceiverBaseV2 {
     /*
      *  Flash multiple assets 
      */
-    function flashloan(address[] memory assets, uint256[] memory amounts) public {
+    function flashloan(address[] memory assets, uint256[] memory amounts) public onlyOwner {
         _flashloan(assets, amounts);
     }
 
     /*
      *  Flash loan 1000000000000000000 wei (1 ether) worth of `_asset`
      */
-    function flashloan(address _asset) public {
+    function flashloan(address _asset) public onlyOwner {
         bytes memory data = "";
         uint amount = 1 ether;
 
