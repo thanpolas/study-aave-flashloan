@@ -1,5 +1,5 @@
 
-pragma solidity ^0.4.19;
+pragma solidity 0.8.0;
 
 interface WethInterface {
   function allowance(address owner, address spender) external view returns (uint256 remaining);
