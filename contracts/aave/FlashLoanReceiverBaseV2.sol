@@ -7,7 +7,6 @@ import { SafeERC20 } from '@openzeppelin/contracts/token/ERC20/utils/SafeERC20.s
 import { IFlashLoanReceiverV2 } from '../interfaces/v2/IFlashLoanReceiverV2.sol';
 import { ILendingPoolAddressesProviderV2 } from '../interfaces/v2/ILendingPoolAddressesProviderV2.sol';
 import { ILendingPoolV2 } from '../interfaces/v2/ILendingPoolV2.sol';
-import "../utils/Withdrawable.sol";
 
 /** 
     !!!
