@@ -42,7 +42,7 @@ contract FlashloanV2 is FlashLoanReceiverBaseV2 {
         
         // Approve the LendingPool contract allowance to *pull* the owed amount
         for (uint i = 0; i < assets.length; i++) {
-            uint amountOwing = amounts[i].add(premiums[i]);
+            uint amountOwing = amounts[i] + (premiums[i]);
             IERC20(assets[i]).approve(address(LENDING_POOL), amountOwing);
         }
         
