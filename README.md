@@ -2,24 +2,29 @@
 
 > Based on https://github.com/PatrickAlphaC/aave-flashloan-mix and his [youtube video][youtube]
 
-## Truffle
+## Instalation and Build
 
-This project uses [truffle, get it, install it][truffle].
+-   Package Uses [Hardhat][hardhat]
 
-### Step 1 - Compile the Contracts
-
-```sh
-truffle compile
-```
-
-### Step 2 - Deploy the Contracts on 
+### 1. Install Dependencies
 
 ```sh
-truffle migrate
+npm i
 ```
 
+### 2. Compile the Contracts
 
+```sh
+npm hardhat compile
+```
 
+### 3. Deploy the Contracts on Kovan
+
+Kovan is the default network
+
+```sh
+npm hardhat run scripts/deploy.js
+```
 
 [youtube]: https://www.youtube.com/watch?v=Aw7yvGFtOvI
-[truffle]: https://www.trufflesuite.com/docs/truffle/getting-started/installation
+[hardhat]: https://hardhat.org/
