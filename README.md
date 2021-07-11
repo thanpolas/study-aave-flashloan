@@ -23,7 +23,7 @@ npm hardhat compile
 Kovan is the default network
 
 ```sh
-npm hardhat run scripts/deploy.js
+npm hardhat run scripts/01-deploy.js
 ```
 
 [youtube]: https://www.youtube.com/watch?v=Aw7yvGFtOvI
