@@ -20,14 +20,27 @@ async function main() {
     signer
   );
 
-  console.log("artifacts.abi:", env.CONTRACT_DEPLOYED_ADDRESS);
   const balance = await wethContract.balanceOf(env.CONTRACT_DEPLOYED_ADDRESS);
-  console.log("balace:", Number(balance));
+  const contractBalance = Number(balance);
+  const owner = await flashloanContract.owner();
+  const ownerBalance = Number(await signer.getBalance());
 
-  const tx = await flashloanContract.flashloan(wethContract, {
-    from: signer.address,
-  });
-  console.log(tx);
+  console.log("balace of deployed contract:", contractBalance);
+
+  console.log("owner of deployed contract", owner);
+  console.log("Your account's address:", signer.address);
+  console.log("Your account's balance:", ownerBalance);
+  try {
+    const tx = await flashloanContract.flashloan(wethContract);
+    console.log("blockNumber b4", tx.blockNumber);
+    const receipt = await tx.wait();
+    console.log("blockNumber", tx.blockNumber);
+  } catch (ex) {
+    console.error("FAILED TO RUN");
+    console.error("reason:", ex.reason);
+    console.error("code:", ex.code);
+    console.error("argument:", ex.argument);
+  }
 }
 
 // We recommend this pattern to be able to use async/await everywhere
