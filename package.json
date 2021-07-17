@@ -1,26 +1,34 @@
 {
-  "name": "aave-code-examples",
-  "version": "1.0.0",
-  "description": "This repository is for example code relating to the Aave Protocol, for developers to use either as reference examples or starters.",
-  "main": "truffle-config.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.2.0",
-    "dotenv": "^10.0.0"
-  },
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.2",
-    "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "chai": "^4.3.4",
-    "ethereum-waffle": "^3.4.0",
-    "ethers": "^5.4.1",
-    "hardhat": "^2.4.3"
-  }
+    "name": "aave-code-examples",
+    "version": "1.0.0",
+    "description": "This repository is for example code relating to the Aave Protocol, for developers to use either as reference examples or starters.",
+    "main": "truffle-config.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@openzeppelin/contracts": "^4.2.0",
+        "dotenv": "^10.0.0"
+    },
+    "devDependencies": {
+        "@nomiclabs/hardhat-ethers": "^2.0.2",
+        "@nomiclabs/hardhat-waffle": "^2.0.1",
+        "chai": "^4.3.4",
+        "ethereum-waffle": "^3.4.0",
+        "ethers": "^5.4.1",
+        "hardhat": "^2.4.3",
+        "eslint": "7.29.0",
+        "eslint-config-airbnb-base": "14.2.1",
+        "eslint-config-prettier": "8.3.0",
+        "eslint-plugin-import": "2.23.4",
+        "eslint-plugin-jest": "24.3.6",
+        "eslint-plugin-jsdoc": "35.3.2",
+        "eslint-plugin-prettier": "3.4.0",
+        "eslint-plugin-security": "1.4.0"
+    }
 }
