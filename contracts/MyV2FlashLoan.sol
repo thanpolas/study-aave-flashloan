@@ -39,8 +39,12 @@ contract FlashloanV2 is FlashLoanReceiverBaseV2, Withdrawable {
         // Therefore ensure your contract has enough to repay
         // these amounts.
 
+        console.log("executeOperation invoked");
         // Approve the LendingPool contract allowance to *pull* the owed amount
         for (uint256 i = 0; i < assets.length; i++) {
+            console.log("In executeOperation loop i:", i);
+            console.log("In executeOperation loop amounts:", amounts[i]);
+            console.log("In executeOperation loop premiums:", premiums[i]);
             uint256 amountOwing = amounts[i] + (premiums[i]);
             IERC20(assets[i]).approve(address(LENDING_POOL), amountOwing);
         }
@@ -95,7 +99,7 @@ contract FlashloanV2 is FlashLoanReceiverBaseV2, Withdrawable {
     /*
      *  Flash loan 1000000000000000000 wei (1 ether) worth of `_asset`
      */
-    function flashloan(address _asset) public onlyOwner {
+    function flashloan(address _asset) public {
         console.log("Flashloan invoked");
         bytes memory data = "";
         uint256 amount = 1 ether;
