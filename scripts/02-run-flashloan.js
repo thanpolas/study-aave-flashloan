@@ -7,15 +7,19 @@ require('dotenv').config();
 const hre = require('hardhat');
 
 const erc20abi = require('./abi/erc20.abi.json');
+const { verifyAaveProvider, getAaveLendingPoolProvider } = require('./common');
 
 const { env } = process;
 const { ethers } = hre;
-const KOVAN_WETH = '0xd0a1e359811322d97991e03f863a0c30c2cf029c';
+const { network } = hre.hardhatArguments;
+
+// Get Weth and AAVE Lending Pool addresses
+const { wethAddress } = getAaveLendingPoolProvider(network);
 
 async function main() {
   const artifacts = await hre.artifacts.readArtifact('FlashloanV2');
   const signer = await ethers.getSigner();
-  const wethContract = new ethers.Contract(KOVAN_WETH, erc20abi, signer);
+  const wethContract = new ethers.Contract(wethAddress, erc20abi, signer);
   const flashloanContract = new ethers.Contract(
     env.CONTRACT_DEPLOYED_ADDRESS,
     artifacts.abi,
@@ -33,8 +37,11 @@ async function main() {
   console.log('owner of deployed contract', owner);
   console.log("Signer account's address:", signer.address);
   console.log("Signer account's balance:", signerBalance);
+
+  await verifyAaveProvider();
+
   try {
-    if (true || contractBalance === 0) {
+    if (contractBalance === 0) {
       const transferSum = ethers.utils.parseEther('0.01');
       console.log(`Transfering ${transferSum} WETH`);
       const tx = await wethContract.transfer(

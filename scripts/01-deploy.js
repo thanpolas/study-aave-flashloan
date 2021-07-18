@@ -4,7 +4,8 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require('hardhat');
-const aaveLendingPoolProviderAbi = require('./abi/aave-lending-Pool-provider-v2.abi.json');
+
+const { verifyAaveProvider, getAaveLendingPoolProvider } = require('./common');
 
 const { ethers } = hre;
 
@@ -12,60 +13,8 @@ const { network } = hre.hardhatArguments;
 
 console.log('target network:', network);
 
-const script = (module.exports = {});
-
-script.getAaveLendingPoolProvider = (networkStr) => {
-  let lendingPoolAddressesProviderAddress;
-  switch (networkStr) {
-    case 'mainnet':
-    case 'mainnet-fork':
-    case 'localhost': // For mainnet forks
-      lendingPoolAddressesProviderAddress =
-        '0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5';
-      break;
-    case 'kovan':
-    case 'kovan-fork':
-      lendingPoolAddressesProviderAddress =
-        '0x88757f2f99175387ab4c6a4b3067c77a695b0349';
-      break;
-    default:
-      throw Error(
-        `Are you deploying to the correct network? (network selected: ${network})`,
-      );
-  }
-
-  return lendingPoolAddressesProviderAddress;
-};
-
-/**
- * Verify that AAVE LP Provider contract exists and is working.
- *
- * @return {Promise}
- */
-script.verifyAaveProvider = async () => {
-  const signer = await ethers.getSigner();
-  const aaveLendingPoolProviderAddress =
-    script.getAaveLendingPoolProvider(network);
-
-  const aaveLendingPoolProviderContract = new ethers.Contract(
-    aaveLendingPoolProviderAddress,
-    aaveLendingPoolProviderAbi,
-    signer,
-  );
-
-  console.log(
-    'Checking validity of AAVE Lending Pool Provider contract:',
-    aaveLendingPoolProviderAddress,
-  );
-
-  const aaveProviderMarketId =
-    await aaveLendingPoolProviderContract.getMarketId();
-
-  console.log('Validity confirmed, id:', aaveProviderMarketId);
-};
-
 // AAVE Lending Pool
-const AAVE_LENDING_POOL = script.getAaveLendingPoolProvider(network);
+const { aavePoolProvider } = getAaveLendingPoolProvider(network);
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -78,12 +27,12 @@ async function main() {
 
   console.log('signer.address:', signer.address);
 
-  await script.verifyAaveProvider();
+  await verifyAaveProvider();
 
   // We get the contract to deploy
   const Contract = await hre.ethers.getContractFactory('FlashloanV2');
-  console.log('Deploying using AAVE_LENDING_POOL:', AAVE_LENDING_POOL);
-  const contract = await Contract.deploy(AAVE_LENDING_POOL);
+  console.log('Deploying using aavePoolProvider:', aavePoolProvider);
+  const contract = await Contract.deploy(aavePoolProvider);
 
   await contract.deployed();
 
