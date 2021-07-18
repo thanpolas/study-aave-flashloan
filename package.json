@@ -2,7 +2,6 @@
     "name": "aave-code-examples",
     "version": "1.0.0",
     "description": "This repository is for example code relating to the Aave Protocol, for developers to use either as reference examples or starters.",
-    "main": "truffle-config.js",
     "directories": {
         "test": "test"
     },
