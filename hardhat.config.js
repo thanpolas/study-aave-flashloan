@@ -19,7 +19,7 @@ module.exports = {
     hardhat: {
       forking: {
         url: mainnetUrl,
-        blockNumber: 11095000,
+        blockNumber: 12845039,
       },
       from: LOCAL_ACCOUNT_1,
       accounts: [
