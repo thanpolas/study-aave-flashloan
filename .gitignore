@@ -13,3 +13,5 @@ db_data
 junit.xml
 .env
 data/
+artifacts
+cache
